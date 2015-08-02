@@ -14,6 +14,12 @@ class CreateRunnersTable extends Migration
     {
         Schema::create('runners', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('chip_code')->unsigned();
+            $table->integer('runner_number')->unsigned();
+            $table->string('firstname');
+            $table->string('lasttname');
+            $table->string('efc');
+            $table->string('efl');
             $table->timestamps();
         });
     }
