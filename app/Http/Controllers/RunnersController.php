@@ -39,6 +39,7 @@ class RunnersController extends Controller
         //$runners = DB::table('runners')->select('chip_code')->get();
         $runners = Runner::get(['chip_code']);
 
+        //return response()->json(['records' => $runners]);
         return response()->json($runners);
     }
 
