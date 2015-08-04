@@ -19,7 +19,7 @@ class CreateRunnersTable extends Migration
             $table->string('firstname');
             $table->string('lasttname');
             $table->string('efc');
-            $table->string('efl');
+            $table->string('cfl');
             $table->timestamps();
         });
     }

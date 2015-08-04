@@ -26,7 +26,7 @@ class RunnersTableSeeder extends Seeder
 	          			'firstname'	=> $faker->name,
 	          			'lasttname'	=> $faker->lastname,
 	           				  'efc'	=> '------',
-	          				  'efl'	=> '------'
+	          				  'cfl'	=> '------'
         		]);
         }
 
