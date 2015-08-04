@@ -4,15 +4,45 @@
 			
 			<div class="media">
 				<div class="media-body">
-					<h4 class="media-heading">DASHBOARD</h4>
+<hr>
+					<center><h4 class="media-heading">RUNNERS - DASHBOARD</h4></center>
 <hr>
 
 					<div ng-controller="dashboardCtrlr">
 	
 						
-						<p ng-repeat="runner in runnerss">
-							{{ runner.chip_code }} && {{ runner.firstname }}
-						</p>
+						  <div class="container">
+						    <div class="row">
+						        <div class="table-responsive">
+
+						          <table class="table table-bordered table-hover table-condensed">
+						            <thead>
+						              <th>ID</th>
+						              <!-- <th>Chip Code</th> -->
+						              <th>Number</th>
+						              <th>Name</th>
+						              <th>Enter Final Corridor</th>
+						              <th>Crossing Final Line</th>
+						              <!-- <th>Actions</th> -->
+						            </thead>
+						            <tbody>
+						              <tr ng-repeat="runner in runners">
+						              	<td>{{ runner.id }}</td>
+						                <!-- <td>{{ runner.chip_code }}</td> -->
+						                <td>{{ runner.runner_number }}</td>
+						                <td>{{ runner.firstname }} {{ runner.lastname }}</td>
+						                <td>{{ runner.efc }}</td>
+						                <td>{{ runner.cfl }}</td>
+						                <!-- <td>
+						                  <button type="button" name="button" class="btn btn-primary" ng-click="sendRunner()">Send</button>
+						                </td> -->
+						              </tr>
+						            </tbody>
+						          </table>
+
+						        </div>
+						    </div>
+						</div>
 						
 
 					</div>

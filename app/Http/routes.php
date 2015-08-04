@@ -13,13 +13,14 @@
 
 Route::get('/', function () {
     return view('index');
+    
 });
 
 
 
 Route::get('/runners', 'RunnersController@runners');
-Route::get('/dash', 'RunnersController@dashboard');
+Route::get('/dashboard', 'RunnersController@dashboard');
 
-Route::post('/runners/{chip_code}', 'RunnersController@update');
+Route::put('/runners/{chip_code}', 'RunnersController@update');
 
 

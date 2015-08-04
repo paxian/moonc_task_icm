@@ -18,9 +18,10 @@ class RunnersTableSeeder extends Seeder
 
         $faker = Faker\Factory::create();
 
-        foreach( range(1,15) as $index ) 
+        foreach( range(1,5) as $index ) 
         {
         	Runner::create([
+                        'result'    => 0,   
         				'chip_code'	=> $faker->year . $faker->year . $faker->year,
 	          		'runner_number' => $faker->year,
 	          			'firstname'	=> $faker->name,
