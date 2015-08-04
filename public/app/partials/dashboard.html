@@ -5,9 +5,16 @@
 			<div class="media">
 				<div class="media-body">
 					<h4 class="media-heading">DASHBOARD</h4>
+<hr>
 
 					<div ng-controller="dashboardCtrlr">
+	
 						
+						<p ng-repeat="runner in runnerss">
+							{{ runner.chip_code }} && {{ runner.firstname }}
+						</p>
+						
+
 					</div>
 
 				</div>

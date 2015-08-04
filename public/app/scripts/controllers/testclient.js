@@ -1,18 +1,19 @@
-'use strict';
+//'use strict';
 
-angular.module('taskApp')
+//var app = angular.module('taskApp')
 
-	.controller('test_clientCtrlr', function($scope, $http){
+	// app.controller('test_clientCtrlr', function($scope, $http){
 
-		$scope.runners = [];
+	// 	$scope.runners = [];
 		
 
-		$http.get("/runners").success(function(data){
-			$scope.runners = data;
-		});
+	// 	$http.get("/runners").success(function(data){
+	// 		$scope.runners = data;
+	// 	}).error(function(data, status, headers, config){
+	// 		console.log(data);
+	// 	});
 
 
 
-	});
-
+	// });
 

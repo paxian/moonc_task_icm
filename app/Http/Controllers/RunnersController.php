@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use Response;
 use App\Models\Runner;
 use DB;
+use Input;
 
 class RunnersController extends Controller
 {
@@ -30,6 +31,9 @@ class RunnersController extends Controller
 
     public function dashboard()
     {
+        // $runners = DB::table('runners')->select('chip_code', 'firstname')->get();
+
+        // return response()->json($runners);
 
     }
 
@@ -93,9 +97,32 @@ class RunnersController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update($chip_code) //Request $request, 
     {
-        //
+        // $runner = Input::all();
+
+        // $runnerUpdate = Runner::find($chip_code);
+
+        // $runnerUpdate->efc = $runner['efc'];
+//-----
+         $efc = Input::get('efc'); //dump($efc);
+         //$runnerUpdate = Runner::first($chip_code);
+        $runnerUpdate = Runner::where('chip_code', $chip_code)->first(); 
+//----- 
+        //dump($runnerUpdate);
+         $runnerUpdate->efc = $efc;
+    //dump($runnerUpdate);
+
+        /*
+        if ( Input::get('tp') == 'A' ) {
+            $runner->efc = Input::get('efc');
+        } else {
+            $runner->efc = Input::get('efl');
+        }
+        */
+
+
+        $runnerUpdate->save();
     }
 
     /**

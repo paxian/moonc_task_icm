@@ -18,5 +18,8 @@ Route::get('/', function () {
 
 
 Route::get('/runners', 'RunnersController@runners');
+Route::get('/dash', 'RunnersController@dashboard');
+
+Route::post('/runners/{chip_code}', 'RunnersController@update');
 
 

@@ -5,15 +5,17 @@
 			<div class="media">
 				<div class="media-body">
 					<h4 class="media-heading">Test-Client</h4>
-					<a class="btn btn-primary">start demo</a>
+					
+
+<div ng-controller="test_clientCtrlr">
+
+<a class="btn btn-danger" ng-click="getTime()">Get Time</a>
+					<p>TIME: {{ time }}</p>
 
 <hr>
-
+	<h3><timer interval="0" />{{minutes}}:{{seconds}}:{{millis}}</h3>
 <hr>
 
-					<div ng-controller="test_clientCtrlr">
-	
-						
 						<p ng-repeat="runner in runners">
 							{{ runner.chip_code }}
 						</p>
