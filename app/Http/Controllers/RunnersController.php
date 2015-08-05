@@ -31,7 +31,13 @@ class RunnersController extends Controller
     {
         $runners = Runner::where('efc', '<>','------')->orderBy('result', 'asc')->get();
 
-        return response()->json($runners);
+        $runners2 = Runner::where('result', '=', '0')->get()->count();
+
+        if ($runners2 == 0) { 
+            return response()->json(['finished', $runners]);
+        } else {
+             return response()->json(['inprogress', $runners]);
+        }
 
     }
 

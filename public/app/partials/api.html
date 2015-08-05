@@ -1,5 +1,4 @@
 
-					
 <div class="container">
 	<div class="jumbotron">
 
@@ -7,35 +6,29 @@
 
 		<div style="background-color:#EEFFFF;">
 
-		<table class="table table-bordered table-hover">
-			<thead>
-				<td>Method</td>
-				<td>URL</td>
-				<td>Description</td>
-			</thead>
-			<tr>
-				<td><b>GET</b></td>
-				<td><a class="btn btn-md btn-primary btn-block" target="_blank" href="http://localhost:8000/runners">
-				/runners</a></td>
-				<td>Get all runners, represented by chip_code field.</td>
-			</tr>
-			<tr>
-				<td><b>PUT</b></td>
-				<td><a class="btn btn-md btn-success btn-block" target="_blank" href="http://localhost:8000/runners/{chip_code}">
-			/runners/{chip_code}</a></td>
-				<td>Updates record with chip_code as ID and with data (timing_point, chip_code, clock_time).</td>
-			</tr>
-			<tr>
-				<td><b>GET</b></td>
-				<td><a class="btn btn-md btn-warning btn-block" target="_blank" href="http://localhost:8000/dashboard">
-				/dashboard</a></td>
-				<td>Get all runners data for dashboard view, which contains task behaviour.</td>
-			</tr>
-		</table>
-
-
-
-        </div>
+			<table class="table table-bordered table-hover">
+				<thead>
+					<td>Method</td>
+					<td>URL</td>
+					<td>Description</td>
+				</thead>
+				<tr>
+					<td><b>GET</b></td>
+					<td><a class="btn btn-md btn-primary btn-block" target="_blank" href="http://localhost:8000/runners">/runners</a></td>
+					<td>Get all runners, represented by chip_code field.</td>
+				</tr>
+				<tr>
+					<td><b>PUT</b></td>
+					<td><a class="btn btn-md btn-success btn-block" target="_blank" href="http://localhost:8000/runners/{chip_code}">/runners/{chip_code}</a></td>
+					<td>Updates record with chip_code as ID and with data (timing_point, chip_code, clock_time).</td>
+				</tr>
+				<tr>
+					<td><b>GET</b></td>
+					<td><a class="btn btn-md btn-warning btn-block" target="_blank" href="http://localhost:8000/dashboard">/dashboard</a></td>
+					<td>Get all runners data for dashboard view, which contains task behaviour.</td>
+				</tr>
+			</table>
+		</div>
 
 	</div>
 </div>

@@ -1,58 +1,60 @@
+
 <div class="row">
 	<div class="col-md-12">
 		<div style="height:500px;">
 			
-			<!-- <div class="media">
-				<div class="media-body"> -->	
+			<div ng-controller="test_clientCtrlr">
 
-<div ng-controller="test_clientCtrlr">
+			<!-- <a class="btn btn-primary" ng-click="timing_point_set('A')">Entry Finish Corridor</a>
+				<a class="btn btn-danger"  ng-click="timing_point_set('B')">Crossing Finish Line</a> -->
 
-<!-- <a class="btn btn-primary" ng-click="timing_point_set('A')">Entry Finish Corridor</a>
-<a class="btn btn-danger"  ng-click="timing_point_set('B')">Crossing Finish Line</a> -->
+				<div class="container">
+					<div class="jumbotron">
 
-<div class="container"> <div class="jumbotron">
+						<h3 class="text-center">Test-Client</h3><hr>
+						<br>
+						<!-- <p>TIME: {{ clock_time }} </p> -->
+						<div class="container">
+							<div class="alert-success" ng-show="cm">
+								<strong>Demo is running ... </strong>
+							</div>
+							<div class="alert-danger" ng-show="!cm">
+								<strong>Demo is finished!</strong>
+							</div>
+						</div>
 
-	<hr><h3 class="text-center">Test-Client</h3><hr>
+						<hr>
+						<div class="text-center"><h3>TIMER <br> <timer interval="0" />{{minutes}}:{{seconds}}:{{millis}} </h3></div>
+						<hr>
 
-<br>
-					<!-- <p>TIME: {{ clock_time }} </p> -->
-	<div class="container">
-		<div class="alert-success" ng-show="cm">
-			<strong>Demo is running ... </strong>
-		</div>
-		<div class="alert-danger" ng-show="fm">
-			<strong>Demo is finished!</strong>
-		</div>
-	</div>
+						<!-- <div class="text-center">
+							<textarea name="" id="" cols="90" rows="15">{{ log }}</textarea>
+						</div> -->
 
-<hr>
-	<div class="text-center"><h3>TIMER <br> <timer interval="0" />{{minutes}}:{{seconds}}:{{millis}} </h3></div>
-<hr>
-
-<table align="center" border="1">
-	<tr>
-		<td>EFC</td>
-		<td>CFL</td>
-	</tr>
-	<tr>
-		<td align="center">
-				<p ng-repeat="runner in runners_efc">
-					{{ runner.chip_code }}
-				</p>
-		</td>
-		<td align="center">
-				<p ng-repeat="runner in runners_cfl">
-					{{ runner.chip_code }}
-				</p>
-		</td>
-	</tr>
-</table>
+						<table class="table table-bordered table-hover" align="center">
+							<tr>
+								<td>EFC</td> 
+								<td>CFL</td>
+							</tr>
+							<tr>
+								<td align="center">
+									<p ng-repeat="runner in runners_efc">
+										{{ runner.chip_code }}
+									</p>
+								</td>
+								<td align="center">
+									<p ng-repeat="runner in runners_cfl">
+										{{ runner.chip_code }}
+									</p>
+								</td>
+							</tr>
+						</table>
 
 					</div>
 
-				<!-- </div>
-			</div> -->
+				</div>
 
+			</div>
 		</div>
 	</div>
 </div>

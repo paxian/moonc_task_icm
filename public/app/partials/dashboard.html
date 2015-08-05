@@ -1,6 +1,6 @@
 <div class="row">
 
-<script>
+	<script>
 // 	var table = document.getElementById("table1");
 
 // var lastRowIndex = table.rows.length-1;
@@ -10,60 +10,63 @@
 //alert( lastCellIndex );
 //table.find('tr:last')
 var row = $("#table1 tr:last");
-	</script>
-			<!-- <div class="media"> -->
-				<!-- <div class="media-body"> -->
+</script>
+<!-- <div class="media"> -->
+<!-- <div class="media-body"> -->
 
-					<div ng-controller="dashboardCtrlr">
+<div ng-controller="dashboardCtrlr">
 	
-						
-						  <div class="container"> <div class="jumbotron">
 
-						  	<hr><h3 class="text-center">Runners - Results</h3><hr>
+	<div class="container"> 
+		<div class="jumbotron">
 
-					<!-- <table class="table table-bordered table-fixed">
+			<h3 class="text-center">-- - = [ &nbsp;Runners - Results&nbsp; ] = - --</h3><br>
+			<div class="alert-success" ng-show="inprogress">
+				<strong>Competition in progress ....</strong>
+			</div>
+			<div class="alert-danger" ng-show="!inprogress">
+				<strong>Competition finished!</strong>
+			</div>
+			<hr>
+
+				<!-- <table class="table table-bordered table-fixed">
 							
-					</table> -->
+				</table> -->
 
-						    <div style="height:250px !important; overflow-y:scroll; background-color:#FFFFDD;">
-						        <div class="table-responsive">
+				<div style="height:200px !important; overflow-y:scroll; background-color:#FFFFDD;">
+					<div class="table-responsive">
 
-						          <table class="table table-bordered table-hover table-condensed" id="table1">
-						           <thead>
-						              <th>ID</th>
-						              <th>Result</th>
-						              <!-- <th>Chip Code</th> -->
-						              <th>Number</th>
-						              <th>Name</th>
-						              <!-- <th>Enter Final Corridor</th> -->
-						              <th>Finish Time</th>
-						            </thead>
+						<table class="table table-bordered table-hover table-striped" id="table1">
+							<thead>
+								<!-- <th>ID</th> -->
+								<th>Result</th>
+								<!-- <th>Chip Code</th> -->
+								<th>Number</th>
+								<th>Name</th>
+								<!-- <th>Enter Final Corridor</th> -->
+								<th>Finish Time</th>
+							</thead>
 
-						            <tbody>
-						              <tr ng-repeat="runner in runners">
-						              	<td>{{ runner.id }}</td>
-						              	<td>{{ runner.result }}</td>
-						                <!-- <td>{{ runner.chip_code }}</td> -->
-						                <td>{{ runner.runner_number }}</td>
-						                <td>{{ runner.firstname }} {{ runner.lastname }}</td>
-						                <!-- <td>{{ runner.efc }}</td> -->
-						                <td>{{ runner.cfl }}</td>
-						              </tr>
-						            </tbody>
-						          </table>
-
-						        </div>
-						    </div>
-
-</div>
-
-						</div>
-						
+							<tbody>
+								<tr ng-repeat="runner in runners">
+									<!-- <td>{{ runner.id }}</td> --> <!-- Record secuential id. -->
+									<td>{{ runner.result }}</td>
+									<!-- <td>{{ runner.chip_code }}</td> -->
+									<td>{{ runner.runner_number }}</td>
+									<td>{{ runner.firstname }} {{ runner.lastname }}</td>
+									<!-- <td>{{ runner.efc }}</td> -->
+									<td>{{ runner.cfl }}</td>
+								</tr>
+							</tbody>
+						</table>
 
 					</div>
+				</div>
+				<hr>
+		</div>
+			<hr><div class="text-center"><sup>Sports event timing</sup></div>
+	</div>
 
-				<!-- </div> -->
-			<!-- </div> -->
-
+</div>
 
 </div>

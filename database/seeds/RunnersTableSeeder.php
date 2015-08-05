@@ -23,7 +23,7 @@ class RunnersTableSeeder extends Seeder
         foreach( range(1,$runners) as $index ) 
         {
         	Runner::create([
-                        'result'    => 0,   
+                           'result' => 0,   
         				'chip_code'	=> $faker->year . $faker->year . $faker->year,
 	          		'runner_number' => $faker->year,
 	          			'firstname'	=> $faker->name,
