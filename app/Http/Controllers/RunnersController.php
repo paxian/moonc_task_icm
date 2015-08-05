@@ -24,11 +24,9 @@ class RunnersController extends Controller
         //
     }
 
-    public function test_client()
-    {
-
-    }
-
+    /**
+     * Returns a set of runners, those who have entered the final corridor.
+     */
     public function dashboard()
     {
         $runners = Runner::where('efc', '<>','------')->orderBy('result', 'asc')->get();
@@ -37,6 +35,9 @@ class RunnersController extends Controller
 
     }
 
+    /**
+     * Returns a set of chip codes, representing runners, for test client.
+     */
     public function runners()
     {
         //$runners = Runner::all();
@@ -91,23 +92,16 @@ class RunnersController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified runner in storage.
      *
-     * @param  Request  $request
-     * @param  int  $id
-     * @return Response
+     * @param  int  $chip_code
      */
-    public function update($chip_code) //Request $request, 
+    public function update($chip_code)
     {
-        // $runner = Input::all();
-        // $runnerUpdate = Runner::find($chip_code);
-        // $runnerUpdate->efc = $runner['efc'];
-//-----
-         $clock_time = Input::get('clock_time'); //dump($efc);
+
+         $clock_time = Input::get('clock_time');
          //$runnerUpdate = Runner::first($chip_code);  //findOrFail
          $runnerUpdate = Runner::where('chip_code', $chip_code)->first();   //dump($runnerUpdate);
-        
-         //$runnerUpdate->efc = $efc;
 
         
         if ( Input::get('timing_point') == 'A' ) {
@@ -116,8 +110,6 @@ class RunnersController extends Controller
             $runnerUpdate->cfl = $clock_time;
             $runnerUpdate->result = Input::get('resultOrder');
         }
-        
-
 
         $runnerUpdate->save();
     }

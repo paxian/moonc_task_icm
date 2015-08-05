@@ -2,21 +2,31 @@
 	<div class="col-md-12">
 		<div style="height:500px;">
 			
-			<div class="media">
-				<div class="media-body">
-					<h4 class="media-heading">Test-Client</h4>
-					
+			<!-- <div class="media">
+				<div class="media-body"> -->	
 
 <div ng-controller="test_clientCtrlr">
 
-<a class="btn btn-primary" ng-click="timing_point('A')">Entry Finish Corridor</a>
-<a class="btn btn-danger" ng-click="timing_point('B')">Crossing Finish Line</a>
+<!-- <a class="btn btn-primary" ng-click="timing_point_set('A')">Entry Finish Corridor</a>
+<a class="btn btn-danger"  ng-click="timing_point_set('B')">Crossing Finish Line</a> -->
+
+<div class="container"> <div class="jumbotron">
+
+	<hr><h3 class="text-center">Test-Client</h3><hr>
 
 <br>
-					<p>TIME: {{ clock_time }}</p>
+					<!-- <p>TIME: {{ clock_time }} </p> -->
+	<div class="container">
+		<div class="alert-success" ng-show="cm">
+			<strong>Demo is running ... </strong>
+		</div>
+		<div class="alert-danger" ng-show="fm">
+			<strong>Demo is finished!</strong>
+		</div>
+	</div>
 
 <hr>
-	<h3><timer interval="0" />{{minutes}}:{{seconds}}:{{millis}}</h3>
+	<div class="text-center"><h3>TIMER <br> <timer interval="0" />{{minutes}}:{{seconds}}:{{millis}} </h3></div>
 <hr>
 
 <table align="center" border="1">
@@ -40,8 +50,8 @@
 
 					</div>
 
-				</div>
-			</div>
+				<!-- </div>
+			</div> -->
 
 		</div>
 	</div>

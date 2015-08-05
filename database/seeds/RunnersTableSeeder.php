@@ -14,11 +14,13 @@ class RunnersTableSeeder extends Seeder
      */
     public function run()
     {
+        $runners = 10;  // <--- EDIT HERE NUMBER OF DESIRED RUNNERS.
+
     	$this->command->info('Seeding Runners table ...');
 
         $faker = Faker\Factory::create();
 
-        foreach( range(1,5) as $index ) 
+        foreach( range(1,$runners) as $index ) 
         {
         	Runner::create([
                         'result'    => 0,   

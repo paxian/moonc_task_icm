@@ -9,6 +9,6 @@
 			});
 		}
 
-		$interval(getRecords, 3000);
+		$interval(getRecords, 500);
 
 	}]);

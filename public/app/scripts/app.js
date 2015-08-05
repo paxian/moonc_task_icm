@@ -14,13 +14,13 @@ var app = angular.module('taskApp', ['ngRoute', 'timer']);
 			templateUrl: 'partials/dashboard.html'
 		})
 
-		// .when('/d', {
-		// 	templateUrl: 'partials/dashboard.html',
-		// 	controller: 'dashboardCtrlr'
-		// })
+		.when('/api', {
+			templateUrl: 'partials/api.html'
+		})
 
 		.otherwise({
 			redirectTo: '/'
+			//templateUrl: 'partials/context.html'
 		});
 
 	});
