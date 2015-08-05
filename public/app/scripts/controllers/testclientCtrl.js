@@ -19,21 +19,6 @@
 		$http.get("/runners").success(function(data){
 			$scope.runners_efc = data;
 
-	$interval(function(){
-		
-		if ( $scope.runners_efc.length == 0 && $scope.runners_cfl.length == 0 ) {
-				$scope.stopTimer();
-
-				$scope.cm = false;
-				$scope.fm = true;
-				console.log("Demo is finished.");
-		} else {
-			$interval($scope.timing_point('A'), getSeconds($scope.minWait, $scope.maxWait) );
-
-			$interval($scope.timing_point('B'), getSeconds($scope.minWait, $scope.maxWait) );
-		}
-
-	}, getSeconds($scope.minWait, $scope.maxWait) );
 
 
 
@@ -103,7 +88,21 @@
 			$scope.clock_time = data.minutes + ':' + data.seconds + ':' + data.millis;
 		});
 
+	$interval(function(){
+		
+		if ( $scope.runners_efc.length == 0 && $scope.runners_cfl.length == 0 ) {
+				$scope.stopTimer();
 
+				$scope.cm = false;
+				$scope.fm = true;
+				console.log("Demo is finished.");
+		} else {
+			$interval($scope.timing_point('A'), 3000 );
+
+			$interval($scope.timing_point('B'), 3000 );
+		}
+
+	}, 3000 );
 
 	function getSeconds(minWait, maxWait) {
 		return Math.floor((Math.random() * maxWait) + minWait) * 1000;
