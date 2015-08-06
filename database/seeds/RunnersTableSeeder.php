@@ -14,7 +14,7 @@ class RunnersTableSeeder extends Seeder
      */
     public function run()
     {
-        $runners = 10;  // <--- EDIT HERE NUMBER OF DESIRED RUNNERS.
+        $runners = 15;  // <--- EDIT HERE NUMBER OF DESIRED RUNNERS.
 
     	$this->command->info('Seeding Runners table ...');
 

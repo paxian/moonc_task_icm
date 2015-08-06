@@ -12,8 +12,15 @@
 				$scope.runners = data[1];
 
 			});
+
+
+			$('.cover').animate({
+				scrollTop: 1300
+			});
+
+
 		}
 
-		$interval(getRecords, 500);
+		$interval(getRecords, 2000);
 
 	}]);

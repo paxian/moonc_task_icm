@@ -56,8 +56,8 @@
 					
 					if( $scope.runners_efc.length == 0 )
 					{
-						console.log('No more runners in EFC.');
-						$scope.log = $scope.log.concat('No more runners in EFC.\n');
+						console.log('No more runners in EFC.\n------[ END of TP_A \'s Turn ]------');
+						$scope.log = $scope.log.concat('No more runners in EFC.\n------[ END of TP_A \'s Turn ]------');
 					} 
 					else 
 						{
@@ -90,8 +90,8 @@
 						
 						if( $scope.runners_cfl.length == 0 ) 
 						{
-							console.log('No more runners in CFL.');
-							$scope.log = $scope.log.concat('No more runners in EFC.\n');
+							console.log('No more runners in CFL.\n======[ END of TP_B \'s Turn ]======');
+							$scope.log = $scope.log.concat('No more runners in CFL.\n======[ END of TP_B \'s Turn ]======');
 						} 
 							else 
 							{
