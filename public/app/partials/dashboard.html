@@ -33,8 +33,6 @@
 
 
 </script>
-<!-- <div class="media"> -->
-<!-- <div class="media-body"> -->
 
 <div ng-controller="dashboardCtrlr">
 	
@@ -42,23 +40,18 @@
 	<div class="container"> 
 		<div class="width:70%;" >  <!-- jumbotron -->
 
-			<h3 class="text-center">-- - = [ &nbsp;Runners - Results&nbsp; ] = - --</h3><br>
-			<div class="alert-success" ng-show="inprogress">
+			<h3 class="text-center">-- - = [ &nbsp;Runners - Results&nbsp; ] = - --</h3>
+			<div ng-class="klass" role="alert" > <!-- ng-show="error" -->
+ 				<strong>{{ Msg }}</strong>
+			</div>	
+<!-- 			<div class="alert alert-success" role="alert" ng-show="inprogress">
 				<strong>Competition in progress ....</strong>
 			</div>
-			<div class="alert-danger" ng-show="!inprogress">
+			<div class="alert alert-danger" role="alert" ng-show="!inprogress">
 				<strong>Competition finished!</strong>
-			</div>
-			<hr>
+			</div> -->
 
-				<!-- <table class="table table-bordered table-fixed">
-							
-				</table> -->
-
-				<div class="cover">
-					<div class="table-responsive">
-
-						<table class="table table-bordered"> <!-- table-striped table-hover -->
+				 <table class="table table-bordered "> <!-- table-fixed -->
 							<thead>
 								<!-- <th>ID</th> -->
 								<!-- <th>Result</th> -->
@@ -67,10 +60,17 @@
 								<th>Name</th>
 								<!-- <th>Enter Final Corridor</th> -->
 								<th>Finish Time</th>
-							</thead>
+							</thead>							
+				</table> 
+
+				<div class="cover" > <!-- scroll-if -->
+					<div class="table-responsive">
+
+						<table class="table table-bordered"> <!-- table-striped table-hover -->
+
 
 							<tbody>  <!-- ng-class="{golden: $index==0, silver: $index == 1, bronce: $index == 2, loser: $last} -->
-								<tr ng-repeat="runner in runners" ng-class="{loser: $last}">
+								<tr ng-repeat="runner in runners" ng-class="{golden: $index==0, silver: $index == 1, bronce: $index == 2}" > <!-- scroll-item -->  <!-- {loser: $last} -->
 									<!-- <td>{{ runner.id }}</td> --> <!-- Record secuential id. -->
 									<!-- <td>{{ runner.result }}</td> -->
 									<!-- <td>{{ runner.chip_code }}</td> -->

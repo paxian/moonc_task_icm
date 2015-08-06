@@ -14,10 +14,10 @@
 						<h3 class="text-center">Test-Client</h3><hr>
 						<!-- <p>TIME: {{ clock_time }} </p> -->
 						<div class="container">
-							<div class="alert-success" ng-show="cm">
+							<div class="alert alert-success" role="alert" ng-show="cm">
 								<strong>Demo is running ... </strong>
 							</div>
-							<div class="alert-danger" ng-show="!cm">
+							<div class="alert alert-danger" role="alert" ng-show="!cm">
 								<strong>Demo is finished!</strong>
 							</div>
 						</div>
@@ -26,14 +26,14 @@
 						<div class="text-center"><h3>TIMER <br> <timer interval="0" />{{minutes}}:{{seconds}}:{{millis}} </h3></div>
 						<hr>
 
-						<!-- <div class="text-center">
-							<textarea name="" id="" cols="90" rows="15">{{ log }}</textarea>
-						</div> -->
-
+						<div class="text-center">
+							<textarea class="log" cols="70" rows="15">{{ log }}</textarea>
+						</div>
+						<hr>
 						<table class="table table-bordered table-hover" align="center">
 							<tr>
-								<td>Runners who are going to Enter Final Corridor</td> <!-- EFC --> 
-								<td>Runners who are going to Cross Final Line</td> <!-- CFL -->
+								<td>RUNNERS GOING TO ENTER FINAL CORRIDOR</td> <!-- EFC --> 
+								<td>RUNNERS GOING TO CROSS FINAL LINE</td> <!-- CFL -->
 							</tr>
 							<tr>
 								<td align="center">

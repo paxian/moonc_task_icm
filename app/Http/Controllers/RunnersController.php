@@ -29,15 +29,23 @@ class RunnersController extends Controller
      */
     public function dashboard()
     {
-        $runners = Runner::where('efc', '<>','------')->orderBy('result', 'asc')->get();
+        $basic = Runner::all()->count();
 
-        $runners2 = Runner::where('result', '=', '0')->get()->count();
-
-        if ($runners2 == 0) { 
-            return response()->json(['finished', $runners]);
+        if ( $basic == 0 ) {
+            return response()->json(['empty', []]);
         } else {
-             return response()->json(['inprogress', $runners]);
+
+            $runners = Runner::where('efc', '<>','------')->orderBy('result', 'asc')->get();
+
+            $runners2 = Runner::where('result', '=', '0')->get()->count();
+
+            if ($runners2 == 0) { 
+                return response()->json(['finished', $runners]);
+            } else {
+                 return response()->json(['inprogress', $runners]);
+            }
         }
+            
 
     }
 
