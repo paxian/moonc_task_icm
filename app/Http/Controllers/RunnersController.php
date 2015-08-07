@@ -61,12 +61,19 @@ class RunnersController extends Controller
      */
     public function runners()
     {
-        //$runners = Runner::all();
-        //$runners = DB::table('runners')->select('chip_code')->get();
-        $runners = Runner::get(['chip_code']);
+        try 
+        {
+            //$runners = Runner::all();
+            //$runners = DB::table('runners')->select('chip_code')->get();
+            $runners = Runner::get(['chip_code']);
 
-        //return response()->json(['records' => $runners]);
-        return response()->json($runners);
+            //return response()->json(['records' => $runners]);
+            return response()->json($runners);
+        }
+        catch(\Illuminate\Database\QueryException $ex) {
+            return response()->json(['norunners', []]);
+        }
+        
     }
 
     /**

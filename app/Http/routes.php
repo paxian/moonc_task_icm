@@ -12,7 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('index');
+    //return view('index');
+    return Redirect::to('/app/#/');
 });
 
 // API routes.

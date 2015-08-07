@@ -1,3 +1,4 @@
+//'use strict';
 
 var app = angular.module('taskApp', ['ngRoute', 'timer']);
 
@@ -18,8 +19,9 @@ var app = angular.module('taskApp', ['ngRoute', 'timer']);
 		})
 
 		.otherwise({
-			redirectTo: '/'
+			//redirectTo: '/'
 			//templateUrl: 'partials/context.html'
+			templateUrl: 'partials/context.html'
 		});
 
 	});

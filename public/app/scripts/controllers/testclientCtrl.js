@@ -16,30 +16,28 @@ app.controller('test_clientCtrlr', ['$scope', '$http', '$interval',
 
 		$http.get("/dashboard").then(function(data) 
 		{ 
-			if( data.data[0] == "empty" ) {
-				endDemo();
-				
-				$scope.log = $scope.log.concat('There is no data loaded in database .. [ Seed database ]\n\n');
-			} 
-			else 
-				{
-				// $scope.inprogress = (data.data[0] == 'finished')? false : true;
-				// $scope.runners = data.data[1];
 
-					if ( data.data[0] == 'finished' ) {
-						endDemo();
+			switch( data.data[0] )
+			{
+				case "notable": 	endDemo();
+									$scope.log = $scope.log.concat('Demo is finished due no database schema .. [ Run migration ]');
+									break;
 				
-						$scope.log = $scope.log.concat('Please reset databse values .. [ Demo was executed previously ]\n\n');
-					} 
-					else
-						{
+				case "empty": 		endDemo();
+									$scope.log = $scope.log.concat('There is no data loaded in database .. [ Seed database ]\n\n');
+									break;
+				
+				case "finished": 	endDemo();
+									$scope.log = $scope.log.concat('Please reset databse values .. [ Demo was executed previously ]\n\n');
+									break;				
+
+				default:
 							$http.get("/runners").success(function(data)
 							{
 								if( data.length == 0 ) 
 								{
 									endDemo();
-				
-									$scope.log = $scope.log.concat('There are no runners, run migrate command [ End of Test client ]\n');
+									$scope.log = $scope.log.concat('There are no runners, run migrate command [ End of Test-Client ]\n');
 								} 
 								else 
 									{
@@ -61,8 +59,8 @@ app.controller('test_clientCtrlr', ['$scope', '$http', '$interval',
 							}).error(function(data, status, headers, config) {
 								console.log(data);
 							});
-						}
-				}
+			}
+		
 		}, function( response ) {
 
 			switch(response.status) {
@@ -123,7 +121,6 @@ app.controller('test_clientCtrlr', ['$scope', '$http', '$interval',
 								console.log(error);	
 							});
 						}
-						//scrollLog();
 				} else 
 					{ 
 						$scope.log = $scope.log.concat('=========[ TP_B \'s Turn ]=========\n');
@@ -170,11 +167,11 @@ app.controller('test_clientCtrlr', ['$scope', '$http', '$interval',
 			$scope.log = $scope.log.concat('TIME STAMP => ' + $scope.clock_time + '\n');
 		});
 
-		function scrollLog() {	$('.log').animate({ scrollTop: 9000 }); };
+		function scrollLog() { $('.log').animate({ scrollTop: 9000 }); };
 
 		function execute( turn )
 		{
-			if ( $scope.runners_efc.length == 0 && $scope.runners_cfl.length == 0 ) 
+			if ( empty($scope.runners_efc) && empty($scope.runners_cfl) ) 
 			{
 					endDemo();
 					$scope.log = $scope.log.concat("No more runners, demo finished, final results on Dashboard.\n");
@@ -193,6 +190,8 @@ app.controller('test_clientCtrlr', ['$scope', '$http', '$interval',
 		{
 			return Math.floor((Math.random() * maxWait) + minWait) * 1000;
 		};
+
+		function empty( a ) { return a.length == 0; };
 
 }]).$inject = ['$scope'];
 
