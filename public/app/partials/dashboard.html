@@ -1,80 +1,59 @@
 <div class="row">
 <style>
-	.loser {
-		background-color: #FFCCCC;
-	}
-	.golden {
-		background-color: #FFFFDD;
-	}
-	.silver {
-		background-color: #EEEEEE;
-	}
-	.bronce {
-		background-color: #EEEEDD;
-	}
+	.golden { background-color: #FFFFDD; }
+	.silver { background-color: #EEEEEE; }
+	.bronce, .last { background-color: #EEEEDD; }
 	.golden, .silver, .bronce {
 		font-weight: bold;
 	}
 	.cover {
 		height:250px !important; overflow-y:scroll; background-color:;
 	}
+	td, th {
+		text-align: center;
+    vertical-align: center;
+}
 </style>
-	<script>
-// 	var table = document.getElementById("table1");
-
-// var lastRowIndex = table.rows.length-1;
-
-//var lastCellIndex = table.rows[lastRowIndex].cells.length-1;
-
-//alert( lastCellIndex );
-//table.find('tr:last')
-//var row = $("#table1 tr:last");
-
-
-
-</script>
 
 <div ng-controller="dashboardCtrlr">
-	
 
-	<div class="container"> 
-		<div class="width:70%;" >  <!-- jumbotron -->
+	<div class="container" ng-focus="onfocus"> 
+		<div class="width:70%;">
 
-			<h3 class="text-center">-- - = [ &nbsp;Runners - Results&nbsp; ] = - --</h3>
-			<div ng-class="klass" role="alert" > <!-- ng-show="error" -->
- 				<strong>{{ Msg }}</strong>
-			</div>	
-<!-- 			<div class="alert alert-success" role="alert" ng-show="inprogress">
-				<strong>Competition in progress ....</strong>
+			<h3 class="text-center">-- - = [ &nbsp;Runners - Results&nbsp; ] = - --</h3><br>
+			<div ng-class="klass" role="alert" style="display: block;">
+ 				<strong>{{ Msg }}</strong><div ng-show="inprogress"><img src="imas/runner.GIF"></div>
 			</div>
-			<div class="alert alert-danger" role="alert" ng-show="!inprogress">
-				<strong>Competition finished!</strong>
-			</div> -->
 
-				 <table class="table table-bordered "> <!-- table-fixed -->
+				 <table class="table table-bordered "> 
 							<thead>
 								<!-- <th>ID</th> -->
 								<!-- <th>Result</th> -->
 								<!-- <th>Chip Code</th> -->
-								<th>Number</th>
-								<th>Name</th>
+								<th style="width:23%">Number</th>
+								<th style="width:50%;">Name</th>
 								<!-- <th>Enter Final Corridor</th> -->
-								<th>Finish Time</th>
+								<th style="width:30%;">Finish Time</th>
 							</thead>							
 				</table> 
 
-				<div class="cover" > <!-- scroll-if -->
+				<div class="cover">
 					<div class="table-responsive">
 
-						<table class="table table-bordered"> <!-- table-striped table-hover -->
+						<table class="table table-bordered table-hover">
 
 
-							<tbody>  <!-- ng-class="{golden: $index==0, silver: $index == 1, bronce: $index == 2, loser: $last} -->
-								<tr ng-repeat="runner in runners" ng-class="{golden: $index==0, silver: $index == 1, bronce: $index == 2}" > <!-- scroll-item -->  <!-- {loser: $last} -->
+							<tbody>
+								<tr ng-repeat="runner in runners" ng-class="{golden: $index == 0 && finished, silver: $index == 1 && finished, bronce: $index == 2 && finished, last: $last}">
 									<!-- <td>{{ runner.id }}</td> --> <!-- Record secuential id. -->
 									<!-- <td>{{ runner.result }}</td> -->
 									<!-- <td>{{ runner.chip_code }}</td> -->
-									<td>{{ runner.runner_number }}</td>
+									<td> 
+										<div ng-show="$index == 0">{{ runner.runner_number }} &nbsp;&nbsp;&nbsp;<img src="imas/gold.png"   ng-show="$index == 0 && finished"> </div>
+										<div ng-show="$index == 1">{{ runner.runner_number }} &nbsp;&nbsp;&nbsp;<img src="imas/silver.png" ng-show="$index == 1 && finished"> </div>
+										<div ng-show="$index == 2">{{ runner.runner_number }} &nbsp;&nbsp;&nbsp;<img src="imas/bronze.png" ng-show="$index == 2 && finished"> </div>
+									 	<div ng-show="$index > 2"> {{ runner.runner_number }}</div>
+									</td>
 									<td>{{ runner.firstname }} {{ runner.lastname }}</td>
 									<!-- <td>{{ runner.efc }}</td> -->
 									<td>{{ runner.cfl }}</td>

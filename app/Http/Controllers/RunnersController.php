@@ -29,23 +29,30 @@ class RunnersController extends Controller
      */
     public function dashboard()
     {
-        $basic = Runner::all()->count();
+        try 
+        {
+            $records = Runner::all()->count();
 
-        if ( $basic == 0 ) {
-            return response()->json(['empty', []]);
-        } else {
-
-            $runners = Runner::where('efc', '<>','------')->orderBy('result', 'asc')->get();
-
-            $runners2 = Runner::where('result', '=', '0')->get()->count();
-
-            if ($runners2 == 0) { 
-                return response()->json(['finished', $runners]);
+            if ( $records == 0 ) {
+                return response()->json(['empty', []]);
             } else {
-                 return response()->json(['inprogress', $runners]);
+
+                $runners = Runner::where('efc', '<>','------')->orderBy('result', 'asc')->get();
+
+                $runners2 = Runner::where('result', '=', '0')->get()->count();
+
+                if ($runners2 == 0) { 
+                    return response()->json(['finished', $runners]);
+                } else {
+                     return response()->json(['inprogress', $runners]);
+                }
             }
         }
-            
+            catch(\Illuminate\Database\QueryException $ex)
+            {
+                //dump($ex);
+                return response()->json(['notable', []]);
+            }    
 
     }
 
@@ -60,6 +67,27 @@ class RunnersController extends Controller
 
         //return response()->json(['records' => $runners]);
         return response()->json($runners);
+    }
+
+    /**
+     * Update the specified runner in storage.
+     *
+     * @param  int  $chip_code
+     */
+    public function update($chip_code)
+    {
+         $clock_time = Input::get('clock_time');
+         //$runnerUpdate = Runner::first($chip_code);  //findOrFail
+         $runnerUpdate = Runner::where('chip_code', $chip_code)->first();   //dump($runnerUpdate);
+        
+        if ( Input::get('timing_point') == 'A' ) {
+            $runnerUpdate->efc = $clock_time;
+        } else {
+            $runnerUpdate->cfl = $clock_time;
+            $runnerUpdate->result = Input::get('resultOrder');
+        }
+
+        $runnerUpdate->save();
     }
 
     /**
@@ -103,29 +131,6 @@ class RunnersController extends Controller
     public function edit($id)
     {
         //
-    }
-
-    /**
-     * Update the specified runner in storage.
-     *
-     * @param  int  $chip_code
-     */
-    public function update($chip_code)
-    {
-
-         $clock_time = Input::get('clock_time');
-         //$runnerUpdate = Runner::first($chip_code);  //findOrFail
-         $runnerUpdate = Runner::where('chip_code', $chip_code)->first();   //dump($runnerUpdate);
-
-        
-        if ( Input::get('timing_point') == 'A' ) {
-            $runnerUpdate->efc = $clock_time;
-        } else {
-            $runnerUpdate->cfl = $clock_time;
-            $runnerUpdate->result = Input::get('resultOrder');
-        }
-
-        $runnerUpdate->save();
     }
 
     /**

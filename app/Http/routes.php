@@ -15,6 +15,7 @@ Route::get('/', function () {
     return view('index');
 });
 
+// API routes.
 
 Route::get('/runners', 'RunnersController@runners');
 

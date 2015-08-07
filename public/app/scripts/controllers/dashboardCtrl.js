@@ -1,82 +1,98 @@
 
 	app.controller('dashboardCtrlr', ['$scope', '$http', '$interval', function($scope, $http, $interval){
-		$scope.runners = [];
-		$scope.inprogress = false;
-		$scope.klass = "alert alert-warning";
-		$scope.Msg = "";
+		
+		$scope.Msg = "";	 // To set a message to be displayed on the view.
+		$scope.finished;	 // To save whether competition is finished or not.
+		$scope.runners = []; // Array to contain all results from server.
+		$scope.klass = "";	 // To se a class which message will contain.
+		$scope.inprogress = false;	// Flag used to understand when to show the gif showing a runner.
 
+		var focus = true; // User is looking at brower's Window/Tab
+
+		/**
+		* Gets Runners and associate them to runners arra.
+		**/
 		function getRecords ()
 		{
 			$http.get("/dashboard").then(function(data) {
 				
-				if( data.data[0] == "empty" ) {
+				if( data.data[0] == "empty" )
+				{
 					$scope.klass = "alert alert-danger";
-					$scope.Msg = "There is no data loaded into database.";
-				} else {
-					
-					$scope.inprogress = (data.data[0] == 'finished')? false : true;
+					$scope.Msg = "..., ..., THERE IS NO DATA LOADED INTO DATABASE TABLE!";
+				} 
+				else
+				{	
+					switch ( data.data[0] )
+					{
+						case 'notable': 	$scope.klass = "alert alert-danger";
+											$scope.Msg = "[ ... THERE IS NO TABLE SCHEMA ON DATABASE ... ]";
+											break;
 
-					$scope.runners = data.data[1];
+						case 'finished':	$scope.klass = "alert alert-info";
+											$scope.Msg = "[       COMPETITION FINISHED       ]";
+											$scope.finished = true;
+											$scope.inprogress = false;
+											$('.cover').animate({ scrollTop: -10000 });
+											break;
+
+						case 'inprogress':	$scope.klass = "alert alert-success";
+											$scope.Msg = "... [ COMPETITION IN PROGRESS ] ...";
+											$scope.inprogress = true;
+											$scope.finished = false;
+											$('.cover').animate({ scrollTop: 10000 });
+											break;
+					}
+					$scope.runners = data.data[1];  // Set retreived data to runners array.
 				}
 
 			}, function( response ) {
 				
-				switch(response.status) 
+				switch( response.status ) 
 				{
-					case 0: $scope.klass = "alert alert-danger"; 
-							$scope.Msg = "Server is gone ... unexpectedly."; 
+					case 0: $scope.klass = "alert alert-danger";
+							$scope.Msg = "SERVER IS GONE! ... [ UNEXPECTEDLY ]";
 							break;
 					
 					case 500: 	$scope.klass = "alert alert-danger";
-								$scope.Msg = "There is no data schema! [ run migrate command ]";  
+								$scope.Msg = "There is no data schema! [ run migrate command ]";
 								break;
 				}
 					$scope.runners = [];
 			});
 
-			if ( $scope.inprogress )
+			// This detects when user is looking at tab/browser, where Runners - Resuls is.
+			$(window).on("blur focus", function(e)
 			{
-				$scope.klass = "alert alert-success";
-				$scope.Msg = "Competition in progress ...";
-			
-				$('.cover').animate({ scrollTop: 9000 });
-			} 
-			else 
-				{
-					$scope.klass = "alert alert-info";
-					$scope.Msg = "Competition finished!    ~~>    Winners are three first places, Golden, Silver and Bronce.";
-					
-					$('.cover').animate({ scrollTop: -9000 });
-				}
+			    var prevType = $(this).data("prevType");
+
+			    if (prevType != e.type) {   //  reduce double fire issues
+			        switch (e.type) 
+			        {
+			            case "blur": 	focus = false;
+							            $scope.Msg = "USER IS AWAY !!! ... connection with server was [ INTERRUPTED ]";
+										$scope.klass = "alert alert-danger";
+			                			break;
+
+			            case "focus": 	focus = true;
+					            		$scope.Msg = "USER CAME BACK! ... [ CONNECTION IS RESTORED ]";
+										$scope.klass = "alert alert-warning";
+			               				break;
+			        }
+			    }
+
+			    $(this).data("prevType", e.type);
+			});
 
 		}
 
-		$interval(getRecords, 1000);
+		/*
+		* This function is called every second in order to get updated records from database.
+		*/
+		$interval(function(){
+			if ( focus )
+				getRecords();
+		}, 1000);
+
 
 	}]);
-
-	// app.directive('scollItem', function(){
-	// 	return {
-	// 		restrict: "A",
-	// 		link: function(scoope, element, attributes) {
-	// 			if (scope.$last) {
-	// 				scope.$emit("Finished");
-	// 			}
-	// 		}
-	// 	}
-	// });
-
-	// app.directive('scrollIf', function() {
-	// 	return {
-	// 		restric: "A",
-	// 		link: function(scope, element, attributes) {
-	// 			scope.$on("Finished", function(){
-	// 				element.scrollTop(1500);
-	// 			});
-	// 		}
-	// 	}
-	// });
-
-
-
-
