@@ -1,13 +1,14 @@
 
-	app.controller('dashboardCtrlr', ['$scope', '$http', '$interval', function($scope, $http, $interval){
-		
-		$scope.Msg = "";	 // To set a message to be displayed on the view.
-		$scope.finished;	 // To save whether competition is finished or not.
-		$scope.runners = []; // Array to contain all results from server.
-		$scope.klass = "";	 // To se a class which message will contain.
+	app.controller('dashboardCtrlr', ['$scope', '$http', '$interval', '$rootScope',
+	function($scope, $http, $interval, $rootScope) 
+	{	
+		$scope.Msg = "";	 		// To set a message to be displayed on the view.
+		$scope.finished;	 		// To save whether competition is finished or not.
+		$scope.runners = []; 		// Array to contain all results from server.
+		$scope.klass = "";	 		// To se a class which message will contain.
 		$scope.inprogress = false;	// Flag used to understand when to show the gif showing a runner.
 
-		var focus = true; // User is looking at brower's Window/Tab
+		var focused = true; 			// User is looking at brower's Window/Tab
 
 		/**
 		* Gets Runners and associate them to runners arra.
@@ -19,9 +20,9 @@
 				if( data.data[0] == "empty" )
 				{
 					$scope.klass = "alert alert-danger";
-					$scope.Msg = "..., ..., THERE IS NO DATA LOADED INTO DATABASE TABLE!";
+					$scope.Msg = "..., ..., THERE IS NO RUNNERS DATA!";
 				} 
-				else
+				 else
 				{	
 					switch ( data.data[0] )
 					{
@@ -33,12 +34,19 @@
 											$scope.Msg = "[       COMPETITION FINISHED       ]";
 											$scope.finished = true;
 											$scope.inprogress = false;
+											$rootScope.testClient_running = $scope.inprogress;
 											$('.cover').animate({ scrollTop: -10000 });
 											break;
 
 						case 'inprogress':	$scope.klass = "alert alert-success";
 											$scope.Msg = "... [ COMPETITION IN PROGRESS ] ...";
 											$scope.inprogress = true;
+											$rootScope.testClient_running = $scope.inprogress;
+
+											if( $rootScope.testClient_running ) {
+												$('.theRunning').text(' ');
+											}
+
 											$scope.finished = false;
 											$('.cover').animate({ scrollTop: 10000 });
 											break;
@@ -69,12 +77,12 @@
 			    if (prevType != e.type) {   //  reduce double fire issues
 			        switch (e.type) 
 			        {
-			            case "blur": 	focus = false;
+			            case "blur": 	focused = false;
 							            $scope.Msg = "USER IS AWAY !!! ... connection with server was [ INTERRUPTED ]";
 										$scope.klass = "alert alert-danger";
 			                			break;
 
-			            case "focus": 	focus = true;
+			            case "focus": 	focused = true;
 					            		$scope.Msg = "USER CAME BACK! ... [ CONNECTION IS RESTORED ]";
 										$scope.klass = "alert alert-warning";
 			               				break;
@@ -83,16 +91,14 @@
 
 			    $(this).data("prevType", e.type);
 			});
-
 		}
 
 		/*
 		* This function is called every second in order to get updated records from database.
 		*/
 		$interval(function(){
-			if ( focus )
+			if ( focus ) 
 				updateDashboard();
 		}, 1000);
-
 
 	}]);

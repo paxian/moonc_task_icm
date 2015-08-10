@@ -1,51 +1,54 @@
 
-app.controller('test_clientCtrlr', ['$scope', '$http', '$interval', 
-	function($scope, $http, $interval)
+app.controller('test_clientCtrlr', ['$scope', '$http', '$interval', '$rootScope',  
+	function($scope, $http, $interval, $rootScope)
 	{
-		$scope.runners_efc = [];
-		$scope.runners_cfl = [];
-		$scope.timerRunning = true;
-		$scope.cm = true;
-		$scope.log = "";
+		$scope.runners_efc = [];	// Array for runners who enter final corridor.
+		$scope.runners_cfl = [];	// Array for runners who cross final line.
+		$scope.timerRunning = true; // For automatically start timer.
+		$scope.cm = true;			// For message indicators to either apperar or not.
+		$scope.log = "";			// For containing all ocurred events during execution.
 
-		$scope.resultOrder = 1;
-		var data_object;
-		var url;
-		var i;
-		var turn = 0;
+		var resultOrder = 1;		// Counter which value is assigned to every runner crossing final line.
+		var data_object;			// Object to be sent to backend.
+		var url;					// Used to set url, it's attribute of data_object.
+		var i;						// To contain generated index to interact between efc and cfl arrays.
+		var turn = 0;				// To contain generated turn, it can be either 1 or 2.
 
 		$http.get("/dashboard").then(function(data) 
 		{ 
 
 			switch( data.data[0] )
 			{
-				case "notable": 	endDemo();
+				case "notable": 	endDemo(); 
 									$scope.log = $scope.log.concat('Demo is finished due no database schema .. [ Run migration ]');
 									break;
 				
-				case "empty": 		endDemo();
-									$scope.log = $scope.log.concat('There is no data loaded in database .. [ Seed database ]\n\n');
+				case "empty": 		endDemo(); 
+									$scope.log = $scope.log.concat('There is no data in runners table .. [ Seed database ]\n\n');
 									break;
 				
-				case "finished": 	endDemo();
+				case "finished": 	endDemo(); 
 									$scope.log = $scope.log.concat('Please reset databse values .. [ Demo was executed previously ]\n\n');
 									break;				
 
 				default:
-							$http.get("/runners").success(function(data)
-							{
+							$http.get("/runners").success(function(data)  
+							{   
+								$scope.testClient_running = true;
+								
 								if( data.length == 0 ) 
 								{
 									endDemo();
 									$scope.log = $scope.log.concat('There are no runners, run migrate command [ End of Test-Client ]\n');
 								} 
 								else 
-									{
+									 {	
+									 	$rootScope.testClient_running = true;
 										$scope.runners_efc = data;
 										
 										$scope.log = $scope.log.concat('EFC array initialized with retreived values.\nCFL array is empty ... which is correct!\n');
 
-										$interval(function(){
+										$interval(function(){ 
 								
 											turn = Math.floor(Math.random() * 2) + 1;
 											
@@ -82,7 +85,7 @@ app.controller('test_clientCtrlr', ['$scope', '$http', '$interval',
 		{
 			$scope.$broadcast('timer-stop');
 
-			data_object = {"timing_point":timing_point, "clock_time":$scope.clock_time, "resultOrder":$scope.resultOrder};
+			data_object = {"timing_point":timing_point, "clock_time":$scope.clock_time, "resultOrder":resultOrder};
 				
 				if ( timing_point == 'A' ) 
 				{
@@ -147,7 +150,7 @@ app.controller('test_clientCtrlr', ['$scope', '$http', '$interval',
 									$scope.log = $scope.log.concat('[CFL] has ' + $scope.runners_cfl.length + ' elements\n');
 									$scope.log = $scope.log.concat('Deleted index: ' + i + ' from [CFL]\n');
 									
-									$scope.resultOrder++;
+									resultOrder++;
 
 									$scope.$broadcast('timer-resume');
 									
@@ -184,14 +187,18 @@ app.controller('test_clientCtrlr', ['$scope', '$http', '$interval',
 				}
 		};
 
-		function endDemo() { $scope.stopTimer(); $scope.cm = false; };
-
-		function getSeconds(minWait, maxWait)
-		{
-			return Math.floor((Math.random() * maxWait) + minWait) * 1000;
-		};
+		function endDemo() { $scope.stopTimer(); $scope.cm = false; $rootScope.testClient_running = $scope.cm; };
 
 		function empty( a ) { return a.length == 0; };
+
+		$scope.$on('$locationChangeStart', function( event ) {
+			var answer = confirm("Are you sure to leave Test-Client?");
+			if( answer ) {
+				endDemo();
+			} else {
+				event.preventDefault();
+			}
+		});
 
 }]).$inject = ['$scope'];
 

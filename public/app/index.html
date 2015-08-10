@@ -11,17 +11,23 @@
 	<nav class="navbar navbar-inverse">
 	  <div class="container-fluid">
 	    <div class="navbar-header">
-	      <a class="navbar-brand" href="#">SPORTS EVENT TIMING</a>
+	      <a class="navbar-brand" href="" ng-show="testClient_running">SPORTS EVENT TIMING</a>
+	      <a class="navbar-brand" href="#" ng-show="!testClient_running" >SPORTS EVENT TIMING</a>
 	    </div>
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav">
-	        <li><a href="/app/#/test_client" target="_blank">Test-Client</a></li>
-	        <li><a href="/app/#/dashboard">Dashboard</a></li>
-	        <li><a href="/app/#/api" target="_blank">API</a></li>
+	        <li><a href="/app/#/dashboard" target="_blank">Dashboard</a></li>
+	        <li>
+	        	<a href="" ng-show="testClient_running" class="theRunning">Test-Client [ Running ... ]</a>
+	        </li>
+	        <li><a href="/app/#/test_client" ng-show="!testClient_running">Test-Client</a></li>
+	        
+	        <li><a href="/app/#/api" target="_top">API</a></li>
 	      </ul>
 
 		  <ul class="nav navbar-nav navbar-right">
-	        <li><a href="#">=[ Demo context ]=</a></li>
+	        <li><a href="#" ng-show="!testClient_running" class="theRunning">=[ Demo context ]=</a>
+	        	<a href="" ng-show="testClient_running">=[ Demo context ]=</a></li>
 	      </ul>
 	    </div>
 	  </div>
@@ -45,6 +51,19 @@
 	<script src="libs/momentjs/moment.js"></script>
 
 	<script src="libs/jquery/dist/jquery.min.js"></script>
+
+	<script>
+		window.onbeforeunload = function (event) {
+		  var message = '';
+		  if (typeof event == 'undefined') {
+		    event = window.event;
+		  }
+		  if (event) {
+		    event.returnValue = message;
+		  }
+		  return message;
+		}
+	</script>
 
 </body>
 </html>

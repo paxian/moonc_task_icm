@@ -1,6 +1,9 @@
 //'use strict';
 
-var app = angular.module('taskApp', ['ngRoute', 'timer']);
+var app = angular.module('taskApp', ['ngRoute', 'timer']).
+	run(function($rootScope) {
+		$rootScope.testClient_running = false;
+	});
 
 	app.config(function($routeProvider){
 
@@ -24,3 +27,5 @@ var app = angular.module('taskApp', ['ngRoute', 'timer']);
 		});
 
 	});
+
+	//app.value('testClient_running', {value:'false'});
