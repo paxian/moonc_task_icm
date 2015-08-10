@@ -20,7 +20,6 @@ var app = angular.module('taskApp', ['ngRoute', 'timer']);
 
 		.otherwise({
 			//redirectTo: '/'
-			//templateUrl: 'partials/context.html'
 			templateUrl: 'partials/context.html'
 		});
 
