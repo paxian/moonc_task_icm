@@ -97,7 +97,7 @@
 		* This function is called every second in order to get updated records from database.
 		*/
 		$interval(function(){
-			if ( focus ) 
+			if ( focused ) 
 				updateDashboard();
 		}, 1000);
 
