@@ -12,7 +12,7 @@
 		/**
 		* Gets Runners and associate them to runners arra.
 		**/
-		function getRecords ()
+		function updateDashboard ()
 		{
 			$http.get("/dashboard").then(function(data) {
 				
@@ -91,7 +91,7 @@
 		*/
 		$interval(function(){
 			if ( focus )
-				getRecords();
+				updateDashboard();
 		}, 1000);
 
 
