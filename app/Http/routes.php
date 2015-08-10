@@ -16,7 +16,13 @@ Route::get('/', function () {
     return Redirect::to('/app/#/');
 });
 
-// API routes.
+Route::get('/api', function () {
+	return Redirect::to('/app/#/api');
+});
+
+Route::get('/test_client', function() {
+	return Redirect::to('/app/#/test_client');
+});
 
 Route::get('/runners', 'RunnersController@runners');
 
