@@ -8,7 +8,7 @@
 		$scope.klass = "";	 		// To se a class which message will contain.
 		$scope.inprogress = false;	// Flag used to understand when to show the gif showing a runner.
 
-		var focused = false; 			// User is looking at brower's Window/Tab
+		var focused = true; 			// User is looking at brower's Window/Tab
 
 		/**
 		* Gets Runners and associate them to runners arra.
