@@ -24,7 +24,7 @@ app.controller('test_clientCtrlr', ['$scope', '$http', '$interval', '$rootScope'
 									break;
 				
 				case "empty": 		endDemo(); 
-									$scope.log = $scope.log.concat('There is no data in runners table .. [ Seed database ]\n\n');
+									$scope.log = $scope.log.concat('There is no data in runners table .. [ Seed runners table ]\n\n');
 									break;
 				
 				case "finished": 	endDemo(); 
